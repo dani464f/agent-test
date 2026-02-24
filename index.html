@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ServiceNow Add-on Prototype</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>ServiceNow Add-on Prototype</h1>
+        <p class="subtitle">Incident intake, triage, and assignment workflow</p>
+      </div>
+      <button id="resetSeed" class="danger">Reset Sample Data</button>
+    </header>
+
+    <main class="layout">
+      <section class="panel">
+        <h2>Create Incident</h2>
+        <form id="incidentForm">
+          <label>
+            Short Description
+            <input id="shortDescription" name="shortDescription" required minlength="5" maxlength="80" />
+          </label>
+
+          <label>
+            Detailed Description
+            <textarea id="description" name="description" rows="4" required minlength="10"></textarea>
+          </label>
+
+          <div class="split">
+            <label>
+              Category
+              <select id="category" name="category">
+                <option>Hardware</option>
+                <option>Software</option>
+                <option>Access</option>
+                <option>Network</option>
+                <option>Other</option>
+              </select>
+            </label>
+
+            <label>
+              Priority
+              <select id="priority" name="priority">
+                <option value="1">1 - Critical</option>
+                <option value="2">2 - High</option>
+                <option value="3" selected>3 - Moderate</option>
+                <option value="4">4 - Low</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="split">
+            <label>
+              Assignment Group
+              <select id="assignmentGroup" name="assignmentGroup">
+                <option>Service Desk</option>
+                <option>Desktop Support</option>
+                <option>Identity Management</option>
+                <option>Network Operations</option>
+              </select>
+            </label>
+
+            <label>
+              Requested By
+              <input id="requestedBy" name="requestedBy" required placeholder="e.g. Alex Johnson" />
+            </label>
+          </div>
+
+          <button type="submit">Create Incident</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Incident Queue</h2>
+        <div class="toolbar">
+          <label>
+            Search
+            <input id="searchInput" placeholder="Search by number, requester, or description" />
+          </label>
+
+          <label>
+            Status
+            <select id="statusFilter">
+              <option value="all">All</option>
+              <option value="New">New</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </label>
+
+          <label>
+            Priority
+            <select id="priorityFilter">
+              <option value="all">All</option>
+              <option value="1">1 - Critical</option>
+              <option value="2">2 - High</option>
+              <option value="3">3 - Moderate</option>
+              <option value="4">4 - Low</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="incidentTableContainer"></div>
+      </section>
+    </main>
+
+    <template id="emptyStateTemplate">
+      <div class="empty-state">
+        <p>No incidents match the current filter.</p>
+      </div>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
